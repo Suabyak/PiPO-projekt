@@ -1,14 +1,13 @@
 import pygame
 from eventOperator import EventOperator
+from renderer import Renderer
 
 
 class Main:
     def __init__(self):
         pygame.init()  # Inicjalizacja pygame
         self.__eventOperator = EventOperator(self)
-        self.__display = pygame.display.set_mode((800, 640))
-        self.__FPSLimit = 144
-        self.__clock = pygame.time.Clock()
+        self.__renderer = Renderer((800, 640))
         self.__running = True
         self.__gameLoop()
 
@@ -17,9 +16,10 @@ class Main:
         nie zechce wyjść z aplikacji, obsługuje ona renderowanie i eventy."""
         while self.__running:
             self.__eventOperator.operateEvents()
-            self.__clock.tick(self.__FPSLimit)
+            self.__renderer.render()
 
     def quit(self, event):
+        """Chyba nie muszę tłumaczyć :|"""
         self.__running = False
 
 
