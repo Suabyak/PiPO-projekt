@@ -1,6 +1,7 @@
 import pygame
 from eventOperator import EventOperator
 from renderer import Renderer
+from mainMenu import MainMenu
 
 
 class Main:
@@ -8,6 +9,8 @@ class Main:
         pygame.init()  # Inicjalizacja pygame
         self.__eventOperator = EventOperator(self)
         self.__renderer = Renderer((800, 640))
+        self.__scenes = [MainMenu()]
+        self.__activeScene = 0
         self.__running = True
         self.__gameLoop()
 
@@ -16,7 +19,10 @@ class Main:
         nie zechce wyjść z aplikacji, obsługuje ona renderowanie i eventy."""
         while self.__running:
             self.__eventOperator.operateEvents()
-            self.__renderer.render()
+            self.__renderer.render(self.getActiveScene())
+
+    def getActiveScene(self):
+        return self.__scenes[self.__activeScene]
 
     def quit(self, event):
         """Zakończenie działania programu."""

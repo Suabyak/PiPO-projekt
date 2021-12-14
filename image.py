@@ -1,7 +1,8 @@
 from pygame import image
+from component import Component
 
 
-class Image:
+class Image(Component):
     """Służy do wczytywania obrazów."""
 
     def __init__(self, path):

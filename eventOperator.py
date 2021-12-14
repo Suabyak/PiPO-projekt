@@ -4,6 +4,11 @@ from pygame import event as Event, constants
 class EventOperator:
     """Klasa do obsługi eventów."""
 
+    def createEvent(id, values):
+        """Stworzenie eventu i umieszczenie go w kolejce
+        do obsłużenia później."""
+        Event.post(Event.Event(id+100000, values))
+
     def __init__(self, main):
         """Przekazanie do obiektu odniesienia do głównej klasy."""
         self.__main = main
