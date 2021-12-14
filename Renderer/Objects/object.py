@@ -1,5 +1,5 @@
-from component import Component
-from transform import Transform
+from Renderer.Objects.Components.component import Component
+from Renderer.Objects.Components.transform import Transform
 
 
 class Object:

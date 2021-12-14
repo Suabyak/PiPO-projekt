@@ -1,5 +1,5 @@
 from pygame import image
-from component import Component
+from Renderer.Objects.Components.component import Component
 
 
 class Image(Component):

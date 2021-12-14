@@ -1,6 +1,6 @@
-from scene import Scene
-from object import Object
-from image import Image
+from Renderer.Scenes.scene import Scene
+from Renderer.Objects.object import Object
+from Renderer.Objects.Components.image import Image
 
 
 class MainMenu(Scene):

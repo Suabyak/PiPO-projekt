@@ -1,7 +1,7 @@
 import pygame
-from eventOperator import EventOperator
-from renderer import Renderer
-from mainMenu import MainMenu
+from Utils.eventOperator import EventOperator
+from Renderer.renderer import Renderer
+from Renderer.Scenes.mainMenu import MainMenu
 
 
 class Main:

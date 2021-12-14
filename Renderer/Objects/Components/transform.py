@@ -1,5 +1,5 @@
-from component import Component
-import maths
+from Renderer.Objects.Components.component import Component
+import Utils.maths as maths
 
 
 class Transform(Component):

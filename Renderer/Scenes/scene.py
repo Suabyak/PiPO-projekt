@@ -1,5 +1,5 @@
 from abc import (ABC, abstractmethod)
-from object import Object
+from Renderer.Objects.object import Object
 
 
 class Scene(ABC):
