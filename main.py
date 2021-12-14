@@ -19,7 +19,7 @@ class Main:
             self.__renderer.render()
 
     def quit(self, event):
-        """Chyba nie muszę tłumaczyć :|"""
+        """Zakończenie działania programu."""
         self.__running = False
 
 
