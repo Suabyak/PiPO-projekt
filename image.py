@@ -1,5 +1,17 @@
-class Image:
-    """Służy do wczytywania obrazów"""
+from pygame import image
 
-    def __init__(self):
-        pass
+
+class Image:
+    """Służy do wczytywania obrazów."""
+
+    def __init__(self, path):
+        """Wczytanie zdjęcia w konstruktorze.
+        Wystarczy wpisać nazwę pliku, bez rozszerzenia
+        oraz bez folderu."""
+        self.__surface = image.load(f"data\\{path}.png")
+
+    def getSurface(self):
+        return self.__surface
+
+    def getDimensions(self):
+        return self.__surface.get_size()
