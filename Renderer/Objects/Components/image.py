@@ -15,4 +15,5 @@ class Image(Component):
         return self.__surface
 
     def getDimensions(self):
+        """Zwrócenie wielkości surface'a."""
         return self.__surface.get_size()

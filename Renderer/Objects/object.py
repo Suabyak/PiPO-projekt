@@ -13,6 +13,8 @@ class Object:
             self.addComponent(component)
 
     def addComponent(self, component):
+        """Dodanie komponentu do obiektu jeżeli dziedzyczy z
+        klasy Component."""
         if issubclass(component.__class__, Component):
             if component.getType() == "Image":
                 self.__renderable = True

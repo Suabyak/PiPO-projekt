@@ -1,4 +1,8 @@
 class Vector2:
+    """Zmienna przechowująca dwie wartości x i y.
+    Można utworzyć wprowadzając jedną wartość jak lista lub
+    tuple albo wprowadzając 2 wartości po przecinkach."""
+
     def __init__(self, *args):
         if len(args) == 1:
             self.x = int(args[0][0])

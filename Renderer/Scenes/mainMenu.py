@@ -4,6 +4,8 @@ from Renderer.Objects.Components.image import Image
 
 
 class MainMenu(Scene):
+    """Scene widoczna po włączeniu gry.s"""
+
     def __init__(self):
         super().__init__()
         self.addObject(
