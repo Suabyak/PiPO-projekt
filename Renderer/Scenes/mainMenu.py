@@ -1,7 +1,6 @@
 from Renderer.Scenes.scene import Scene
 from Renderer.Objects.button import Button
-from Renderer.Objects.label import Label
-from Renderer.Objects.Components.rect import Rect
+from Renderer.Objects.Components.text import Text
 
 
 class MainMenu(Scene):
@@ -10,9 +9,12 @@ class MainMenu(Scene):
     def __init__(self, main):
         super().__init__()
         self.__main = main
-        self.addObject(Button("nawiekszyszef", Rect(
-            (100, 100), (51, 51, 255)), self.test, position=(500, 500)))
-        self.addObject(Label("napisek", "Co tam?", 12, (0, 200), (255, 0, 0)))
+        self.__screenSize = main.getScreenSize()
+        self.addObject(Button("Play", Text("Graj", 64, origin=(0.5, 0)),
+                              self.play, position=(self.__screenSize[0]/2, 100)))
+        self.addObject(Button("Quit", Text("Wyjdz z Gry", 64, origin=(0.5, 0)),
+                              self.__main.quit, position=(self.__screenSize[0]/2, 300)))
 
-    def test(self):
-        print(self.__main)
+    def play(self):
+        print("Come back later.")
+        exit(0)

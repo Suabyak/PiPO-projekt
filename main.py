@@ -41,6 +41,9 @@ class Main:
     def getActiveScene(self):
         return self.__scenes[self.__activeScene]
 
+    def getScreenSize(self):
+        return self.__SCREEN_SIZE
+
     def mouseClick(self, event):
         # pętla od tyłu (jak michael jackson i jego moonwalk)
         for obj in reversed(self.getActiveScene().getObjects()):

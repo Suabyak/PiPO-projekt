@@ -4,7 +4,8 @@ from Renderer.Objects.Components.event import Event
 
 
 class Button(Object):
-    def __init__(self, id, mainComponent, action, active=True, position=(0, 0)):
+    def __init__(self, id, mainComponent, action, active=True,
+                 position=(0, 0)):
         if mainComponent.getType() not in ["Image", "Text", "Rect"]:
             print("Głównym komponentem może być tylko zdjęcie, "
                   "\"rect\" lub napis.")
