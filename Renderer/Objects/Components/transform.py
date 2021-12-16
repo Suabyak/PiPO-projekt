@@ -1,8 +1,11 @@
 from Renderer.Objects.Components.component import Component
-import Utils.maths as maths
+from Utils import maths
 
 
 class Transform(Component):
+    """Przechowuje pozycje obiektu,
+    każdy obiekt posiada ten komponent."""
+
     def __init__(self, *position):
         self.__position = maths.Vector2(position)
 

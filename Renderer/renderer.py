@@ -10,8 +10,14 @@ class Renderer:
     def render(self, scene):
         """Wyświetlanie wszystkich elementów na ekranie."""
         self.__clock.tick(self.__FPSLimit)
+        self.__display.fill((0, 0, 0))
         for obj in scene.getObjects():
             if (obj.isActive() and obj.isRenderable()):
-                self.__display.blit(obj.getComponent("Image").getSurface(),
-                                    obj.getComponent("Transform").getPosition())
+                position = obj.getComponent("Transform").getPosition()
+                for componentType, component in obj.getComponents().items():
+                    if not component.isRenderable():
+                        continue
+                    surface, origin = component.render()
+                    self.__display.blit(
+                        surface, (position[0]-origin.x, position[1]-origin.y))
         Display.flip()

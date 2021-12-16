@@ -1,19 +1,24 @@
 from pygame import image
 from Renderer.Objects.Components.component import Component
+from Utils import maths
 
 
 class Image(Component):
     """Służy do wczytywania obrazów."""
+    __images = dict()
 
-    def __init__(self, path):
+    def __init__(self, path, origin=maths.Vector2(0, 0)):
         """Wczytanie zdjęcia w konstruktorze.
         Wystarczy wpisać nazwę pliku, bez rozszerzenia
         oraz bez folderu."""
-        self.__surface = image.load(f"data\\{path}.png")
+        self.__path = path
+        self.__origin = origin
+        if self.__path not in Image.__images.keys():
+            Image.__images[self.__path] = image.load(
+                f"Data\\{self.__path}.png")
 
-    def getSurface(self):
-        return self.__surface
+    def render(self):
+        return Image.__images[self.__path], self.__origin
 
-    def getDimensions(self):
-        """Zwrócenie wielkości surface'a."""
-        return self.__surface.get_size()
+    def isRenderable(self):
+        return True

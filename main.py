@@ -7,8 +7,10 @@ from Renderer.Scenes.mainMenu import MainMenu
 class Main:
     def __init__(self):
         pygame.init()  # Inicjalizacja pygame
+        self.__TITLE = "Strażak Bam-Bam"
         self.__eventOperator = EventOperator(self)
         self.__renderer = Renderer((800, 640))
+        pygame.display.set_caption(self.__TITLE)
         self.__scenes = [MainMenu()]
         self.__activeScene = 0
         self.__running = True

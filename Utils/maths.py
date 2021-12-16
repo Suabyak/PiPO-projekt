@@ -21,3 +21,17 @@ class Vector2:
         self.x += vector.x
         self.y += vector.y
         return self
+
+    def __sub__(self, vector):
+        if not isinstance(vector, Vector2):
+            print(f"Nie można od Vector2 odjąć {vector.__class__.__name__}")
+            exit(1)
+        self.x -= vector.x
+        self.y -= vector.y
+        return self
+
+
+def getGreater(val1, val2):
+    if val1 > val2:
+        return val1
+    return val2

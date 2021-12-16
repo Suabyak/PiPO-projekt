@@ -11,3 +11,6 @@ class Component(ABC):
     def getType(self):
         """Zwrócenie nazwy klasy."""
         return self.__class__.__name__
+
+    def isRenderable(self):
+        return False
