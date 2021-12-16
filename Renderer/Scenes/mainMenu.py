@@ -8,7 +8,7 @@ from Utils import maths
 class MainMenu(Scene):
     """Scene widoczna po włączeniu gry."""
 
-    def __init__(self):
+    def __init__(self, screenSize):
         super().__init__()
         self.addObject(Object("Placeholder1", components=[
                        Image("placeholder", origin=maths.Vector2(0.5, 0.5))]))

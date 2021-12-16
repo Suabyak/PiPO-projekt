@@ -8,12 +8,15 @@ class Main:
     def __init__(self):
         pygame.init()  # Inicjalizacja pygame
         self.__TITLE = "Strażak Bam-Bam"
+        self.__SCREEN_SIZE = (800, 640)
+
         self.__eventOperator = EventOperator(self)
-        self.__renderer = Renderer((800, 640))
+        self.__renderer = Renderer(self.__SCREEN_SIZE)
         pygame.display.set_caption(self.__TITLE)
-        self.__scenes = [MainMenu()]
+        self.__scenes = [MainMenu(self.__SCREEN_SIZE)]
         self.__activeScene = 0
         self.__running = True
+
         self.__gameLoop()
 
     def __gameLoop(self):

@@ -1,10 +1,9 @@
 from Renderer.Objects.Components.component import Component
 from Renderer.Objects.Components.transform import Transform
-from pygame.surface import Surface
 
 
 class Object:
-    def __init__(self, id, active=True, components=list()):
+    def __init__(self, id, position=(0, 0), active=True, components=list()):
         self.__id = id
         self.__components = dict()
         self.__renderable = False
@@ -12,7 +11,7 @@ class Object:
         for component in components:
             self.addComponent(component)
         if not self.hasComponent("Transform"):
-            self.addComponent(Transform(0, 0))
+            self.addComponent(Transform(position))
 
     def addComponent(self, component):
         """Dodanie komponentu do obiektu jeżeli dziedzyczy z
