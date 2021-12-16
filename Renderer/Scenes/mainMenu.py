@@ -12,7 +12,7 @@ class MainMenu(Scene):
         self.__screenSize = main.getScreenSize()
         self.addObject(Button("Play", Text("Graj", 64, origin=(0.5, 0)),
                               self.play, position=(self.__screenSize[0]/2, 100)))
-        self.addObject(Button("Quit", Text("Wyjdz z Gry", 64, origin=(0.5, 0)),
+        self.addObject(Button("Quit", Text("Wyjdź z Gry", 64, origin=(0.5, 0)),
                               self.__main.quit, position=(self.__screenSize[0]/2, 300)))
 
     def play(self):
