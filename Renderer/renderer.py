@@ -18,6 +18,8 @@ class Renderer:
                     if not component.isRenderable():
                         continue
                     surface, origin = component.render()
-                    self.__display.blit(
-                        surface, (position[0]-origin.x, position[1]-origin.y))
+                    surfaceSize = surface.get_size()
+                    renderPosition = (position[0]-surfaceSize[0]*(origin.x),
+                                      position[1]-surfaceSize[1]*(origin.y))
+                    self.__display.blit(surface, renderPosition)
         Display.flip()

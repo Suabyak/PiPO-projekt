@@ -5,11 +5,11 @@ class Vector2:
 
     def __init__(self, *args):
         if len(args) == 1:
-            self.x = int(args[0][0])
-            self.y = int(args[0][1])
+            self.x = float(args[0][0])
+            self.y = float(args[0][1])
         elif len(args) == 2:
-            self.x = int(args[0])
-            self.y = int(args[1])
+            self.x = float(args[0])
+            self.y = float(args[1])
         else:
             print(f"Nie da się stworzyć Vector2 wartościami {args}")
             exit(1)

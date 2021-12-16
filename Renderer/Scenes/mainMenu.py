@@ -6,11 +6,11 @@ from Utils import maths
 
 
 class MainMenu(Scene):
-    """Scene widoczna po włączeniu gry.s"""
+    """Scene widoczna po włączeniu gry."""
 
     def __init__(self):
         super().__init__()
         self.addObject(Object("Placeholder1", components=[
-                       Image("placeholder", origin=maths.Vector2(100, 100))]))
+                       Image("placeholder", origin=maths.Vector2(0.5, 0.5))]))
         self.addObject(Object("tekst", components=[Label(
-            "Siema", 40, origin=maths.Vector2(-100, -200))]))
+            "Siema", 40, origin=maths.Vector2(0, 0))]))
