@@ -19,9 +19,9 @@ class EventOperator:
         te które nie mają funkcji obsługującej
         są wypisywane w konsoli."""
         for event in Event.get():
-            try:
+            if event.type in self.__operatableEvents.keys():
                 self.__operatableEvents[event.type](event)
-            except:
+            else:
                 print(event)
 
     def __initEventOperators(self):
@@ -31,7 +31,9 @@ class EventOperator:
         Przypisujemy jakiś typ eventu jako key
         i jakąś funkcje jako value.
         Funkcje obsługujące eventy muszą mieć 2 argumenty
-        pierwszy self a drugi event który jest
+        pierwszy main a drugi event który jest
         w tym momencie obsługiwany."""
-        self.__operatableEvents = dict()
-        self.__operatableEvents[constants.QUIT] = self.__main.quit
+        self.__operatableEvents = {
+            constants.QUIT: self.__main.quit,
+            constants.MOUSEBUTTONDOWN: self.__main.mouseClick
+            }

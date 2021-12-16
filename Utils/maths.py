@@ -5,8 +5,12 @@ class Vector2:
 
     def __init__(self, *args):
         if len(args) == 1:
-            self.x = float(args[0][0])
-            self.y = float(args[0][1])
+            if isinstance(args[0], Vector2):
+                self.x = args[0].x
+                self.y = args[0].y
+            else:
+                self.x = float(args[0][0])
+                self.y = float(args[0][1])
         elif len(args) == 2:
             self.x = float(args[0])
             self.y = float(args[1])
@@ -35,3 +39,17 @@ def getGreater(val1, val2):
     if val1 > val2:
         return val1
     return val2
+
+
+def getLesser(val1, val2):
+    if val1 < val2:
+        return val1
+    return val2
+
+
+def getMinAndMax(val1, val2):
+    return getLesser(val1, val2), getGreater(val1, val2)
+
+
+def isBetween(min, max, val):
+    return min <= val and val < max

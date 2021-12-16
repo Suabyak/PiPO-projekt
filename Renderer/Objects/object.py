@@ -1,8 +1,10 @@
 from Renderer.Objects.Components.component import Component
 from Renderer.Objects.Components.transform import Transform
+from abc import ABC, abstractmethod
 
 
-class Object:
+class Object(ABC):
+    @abstractmethod
     def __init__(self, id, position=(0, 0), active=True, components=list()):
         self.__id = id
         self.__components = dict()
@@ -29,8 +31,14 @@ class Object:
     def hasComponent(self, componentType):
         return componentType in self.__components.keys()
 
+    def hasAnyComponent(self, componentTypes):
+        for componentType in componentTypes:
+            if self.hasComponent(componentType):
+                return True
+        return False
+
     def isRenderable(self):
-        return self.hasComponent("Image") or self.hasComponent("Label")
+        return self.hasAnyComponent(("Image", "Text", "Rect"))
 
     def isActive(self):
         return self.__active
