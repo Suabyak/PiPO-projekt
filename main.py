@@ -58,7 +58,7 @@ class Main:
             collider = obj.getComponent("Collider")
             if collider.isOver(obj.getComponent(
                     "Transform").getPosition(), event.dict["pos"]):
-                obj.getComponent("Event").run("Click")
+                obj.getComponent("Event").run("Click", event)
 
     def quit(self, event):
         """Zakończenie działania programu."""
