@@ -1,6 +1,7 @@
 import pygame
 from Utils.eventOperator import EventOperator
 from Renderer.renderer import Renderer
+from os import listdir
 
 
 class Main:
@@ -29,9 +30,14 @@ class Main:
     def loadScenes(self):
         scenes = dict()
 
-        from Renderer.Scenes.mainMenu import MainMenu
-
-        scenes["MainMenu"] = MainMenu(self)
+        for dictionary in listdir("Data\\Scenes"):
+            for scene in listdir(f"Data\\Scenes\\{dictionary}"):
+                if ".py" in scene:
+                    scene = scene.replace(".py", "")
+                    exec(
+                        f"from Data.Scenes.{dictionary}.{scene} import {dictionary}")
+                    exec(
+                        f"scenes[{dictionary}.__name__] = {dictionary}(self)")
 
         return scenes
 

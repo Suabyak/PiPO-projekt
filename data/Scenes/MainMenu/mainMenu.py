@@ -1,4 +1,4 @@
-from Renderer.Scenes.scene import Scene
+from Renderer.scene import Scene
 from Renderer.Objects.button import Button
 from Renderer.Objects.Components.text import Text
 
