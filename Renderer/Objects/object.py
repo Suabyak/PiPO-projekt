@@ -38,7 +38,7 @@ class Object(ABC):
         return False
 
     def isRenderable(self):
-        return self.hasAnyComponent(("Image", "Text", "Rect"))
+        return self.hasAnyComponent(("Image", "Text", "Rect", "ColouredText"))
 
     def isActive(self):
         return self.__active
