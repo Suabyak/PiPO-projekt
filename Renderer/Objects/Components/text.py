@@ -18,7 +18,7 @@ class Text(Component):
         self.__color = color
         self.__origin = maths.Vector2(origin)
         if self.__size not in Text.__font.keys():
-            """Ten mały trik sprawia że kilka komponentów Label może
+            """Ten mały trik sprawia że kilka komponentów Text może
             korzystać z tej samej czcionki,
             zamiast tworzyć kilka obiektów czcionki."""
             Text.__font[self.__size] = Font.Font(

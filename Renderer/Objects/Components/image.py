@@ -18,7 +18,8 @@ class Image(Component):
                 f"Data\\{self.__path}.png")
 
     def render(self):
-        return Image.__images[self.__path], self.__origin
+        surf = Image.__images[self.__path]
+        return surf, self.__origin
 
     def isRenderable(self):
         return True

@@ -1,4 +1,5 @@
 from pygame import display as Display, time as Time
+from log import Log
 
 
 class Renderer:
@@ -6,6 +7,7 @@ class Renderer:
         self.__display = Display.set_mode(resolution)
         self.__clock = Time.Clock()
         self.__FPSLimit = 144
+        Log.executionLog("Renderer created.")
 
     def render(self, scene):
         """Wyświetlanie wszystkich elementów na ekranie."""
@@ -18,6 +20,7 @@ class Renderer:
                     if not component.isRenderable():
                         continue
                     surface, origin = component.render()
+                    surface.set_alpha(obj.getVisibility())
                     surfaceSize = surface.get_size()
                     renderPosition = (position[0]-surfaceSize[0]*(origin.x),
                                       position[1]-surfaceSize[1]*(origin.y))
