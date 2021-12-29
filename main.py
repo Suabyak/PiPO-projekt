@@ -23,7 +23,7 @@ class Main:
         self.__activeScene = None
         self.__running = True
 
-        self.setActiveScene("TitleScreen")
+        self.setActiveScene("MainMenu")
         self.__gameLoop()
 
     def __gameLoop(self):
@@ -71,8 +71,8 @@ class Main:
     def tickAnimations(self, scene):
         for obj in scene.getObjects():
             for component in obj.getComponents().values():
-                if (issubclass(component.__class__, Animation) and component.isActive()
-                        or isinstance(component, AnimationSequence) and component.isRunning()):
+                if ((issubclass(component.__class__, Animation) and component.isActive())
+                        or (isinstance(component, AnimationSequence) and component.isRunning())):
                     component.tick()
 
     def quit(self, event):

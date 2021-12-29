@@ -10,6 +10,7 @@ class Appear(Animation):
 
     def takeEffect(self):
         self.getParent().setVisibility(self.getAlpha())
+        self.getParent().setActive(True)
 
     def reset(self):
         super().reset()

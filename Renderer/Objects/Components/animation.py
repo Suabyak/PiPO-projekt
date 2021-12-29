@@ -22,6 +22,7 @@ class Animation(Component, ABC):
         return float(self.__time)
 
     def activate(self):
+        self.reset()
         self.__active = True
         Log.executionLog(f"Animation \"{self.getType()}\" of "
                          f"Object \"{self.getParent().getId()}\" activated.")

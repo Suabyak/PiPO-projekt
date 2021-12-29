@@ -1,4 +1,5 @@
 from Renderer.Objects.Components.component import Component
+from log import Log
 
 
 class AnimationSequence(Component):
@@ -10,6 +11,8 @@ class AnimationSequence(Component):
     def start(self):
         self.__running = True
         self.__activeAnimation = 0
+        Log.executionLog(
+            f"AnimationSequence of Object \"{self.getParent().getId()}\" started.")
         self.getActiveAnimation().activate()
 
     def isRunning(self):
@@ -19,12 +22,15 @@ class AnimationSequence(Component):
         return self.__sequence[self.__activeAnimation]
 
     def tick(self):
+        print(self.getParent().getId())
         self.getActiveAnimation().tick()
         if not self.getActiveAnimation().isActive():
             self.__activeAnimation += 1
             if self.__activeAnimation == len(self.__sequence):
                 self.__running = False
                 self.__activeAnimation = 0
+                Log.executionLog(
+                    f"AnimationSequence of object {self.getParent().getId()} finished.")
                 return
             self.getActiveAnimation().activate()
 
