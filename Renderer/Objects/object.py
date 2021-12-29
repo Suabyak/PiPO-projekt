@@ -69,9 +69,7 @@ class Object(ABC):
         if self.getParent():
             visibility = self.__visibility / 255.0 * \
                 self.getParent().getVisibility() / 255.0
-            print(int(visibility*255), self.getId(), "siur")
             return int(visibility*255)
-        print(self.__visibility, self.getId(), "siur")
         return self.__visibility
 
     def setVisibility(self, visibility):

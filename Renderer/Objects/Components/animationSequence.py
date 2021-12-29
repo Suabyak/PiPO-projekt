@@ -22,7 +22,6 @@ class AnimationSequence(Component):
         return self.__sequence[self.__activeAnimation]
 
     def tick(self):
-        print(self.getParent().getId())
         self.getActiveAnimation().tick()
         if not self.getActiveAnimation().isActive():
             self.__activeAnimation += 1

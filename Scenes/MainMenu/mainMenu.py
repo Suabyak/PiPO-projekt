@@ -13,9 +13,9 @@ class MainMenu(Scene):
     def __init__(self, main):
         super().__init__("MainMenu", main)
         operator = MainMenuOperator()
+        self.addObject(operator)
         self.addObject(Title(self.getScreenSize(),
                              operator.getComponent("Appear").activate))
-        self.addObject(operator)
 
         self.addObject(ColouredLabel("Title2", "Strażak /bBam/-/rBam/",
                                      32, parent=operator, origin=(0.5, 0), position=(self.getScreenSize()[0]/2, 50)))
