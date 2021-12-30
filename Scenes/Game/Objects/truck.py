@@ -5,8 +5,9 @@ from Utils.maths import sin, isBetween
 
 
 class Truck(Object):
-    def __init__(self, screenSize):
-        super().__init__("Truck", (screenSize[0]/2, screenSize[1]/2))
+    def __init__(self, camera, screenSize):
+        super().__init__(
+            "Truck", (screenSize[0]/2, screenSize[1]/2), parent=camera)
         self.addComponent(Image("Truck", (0, 0)))
         self.__rotation = 0
         self.__rotationSpeed = 0
@@ -19,8 +20,10 @@ class Truck(Object):
         surface.set_alpha(self.getVisibility())
         surfaceSize = surface.get_size()
         surface = transform.rotate(surface, -self.__rotation)
-        renderPosition = (position[0]-surfaceSize[0]*(origin.x),
-                          position[1]-surfaceSize[1]*(origin.y))
+        parent = self.getParent()
+        parentPos = parent.getComponent("Transform").getPosition()
+        renderPosition = (position[0]-surfaceSize[0]*(origin.x)+parentPos[0],
+                          position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
         return surface, renderPosition
 
     def move(self):
@@ -35,6 +38,7 @@ class Truck(Object):
             (vertMultiplier * (1 - abs(sinRotation)))
         horizontalOffset = self.__velocity * sinRotation
         self.getComponent("Transform").move((horizontalOffset, verticalOffset))
+        self.getParent().move((-horizontalOffset, -verticalOffset))
 
         self.applyFriction()
 

@@ -20,13 +20,19 @@ class Renderer:
                     self.__display.blit(surface, position)
                 except Exception:
                     position = obj.getComponent("Transform").getPosition()
+                    parent = obj.getParent()
+                    if parent:
+                        parentPos = parent.getComponent(
+                            "Transform").getPosition()
+                    else:
+                        parentPos = (0, 0)
                     for componentType, component in obj.getComponents().items():
                         if not component.isRenderable():
                             continue
                         surface, origin = component.render()
                         surface.set_alpha(obj.getVisibility())
                         surfaceSize = surface.get_size()
-                        renderPosition = (position[0]-surfaceSize[0]*(origin.x),
-                                          position[1]-surfaceSize[1]*(origin.y))
+                        renderPosition = (position[0]-surfaceSize[0]*(origin.x)+parentPos[0],
+                                          position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
                         self.__display.blit(surface, renderPosition)
         Display.flip()

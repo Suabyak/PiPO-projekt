@@ -11,7 +11,7 @@ class Game(Scene):
         camera = Camera()
         self.addObject(camera)
         self.addObject(Map(camera))
-        self.addObject(Truck(main.getScreenSize()))
+        self.addObject(Truck(camera, main.getScreenSize()))
 
     def start(self):
         pass

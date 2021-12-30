@@ -94,12 +94,12 @@ class Main:
         truck = Object.get("Truck")
         rotSpeed = -int(str(bin(self.isKeyDown(pygame.constants.K_a))), 2)
         rotSpeed += int(str(bin(self.isKeyDown(pygame.constants.K_d))), 2)
-        truck.rotate(rotSpeed*0.25)
+        truck.rotate(rotSpeed*0.15)
 
         acceleration = 3 * \
             int(str(bin(self.isKeyDown(pygame.constants.K_w))), 2)
         acceleration -= int(str(bin(self.isKeyDown(pygame.constants.K_s))), 2)
-        truck.accelerate(acceleration*0.1)
+        truck.accelerate(acceleration*0.05)
 
         truck.move()
 
