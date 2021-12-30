@@ -54,7 +54,7 @@ class Object(ABC):
         return self.hasAnyComponent(("Image", "Text", "Rect", "ColouredText"))
 
     def isActive(self):
-        return self.__active or self.getVisibility() == 0
+        return self.__active and self.getVisibility() > 0
 
     def setActive(self, active):
         self.__active = active

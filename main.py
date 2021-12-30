@@ -1,6 +1,7 @@
 import pygame
 from Utils.eventOperator import EventOperator
 from Renderer.renderer import Renderer
+from Renderer.Objects.object import Object
 from Renderer.Objects.Components.animation import Animation
 from Renderer.Objects.Components.animationSequence import AnimationSequence
 from log import Log
@@ -32,6 +33,8 @@ class Main:
         nie zechce wyjść z aplikacji, obsługuje ona renderowanie i eventy."""
         while self.__running:
             self.__eventOperator.operateEvents()
+            if self.__activeScene == "Game":
+                self.tickGame()
             self.__renderer.render(self.getActiveScene())
             self.tickAnimations(self.getActiveScene())
 
@@ -62,7 +65,7 @@ class Main:
     def isKeyDown(self, key):
         if key not in self.__keysDown.keys():
             return False
-        return self.__keysDown[key]
+        return True
 
     def mouseClick(self, event):
         # pętla od tyłu (jak michael jackson i jego moonwalk)
@@ -86,6 +89,19 @@ class Main:
                 if ((issubclass(component.__class__, Animation) and component.isActive())
                         or (isinstance(component, AnimationSequence) and component.isRunning())):
                     component.tick()
+
+    def tickGame(self):
+        truck = Object.get("Truck")
+        rotSpeed = -int(str(bin(self.isKeyDown(pygame.constants.K_a))), 2)
+        rotSpeed += int(str(bin(self.isKeyDown(pygame.constants.K_d))), 2)
+        truck.rotate(rotSpeed*0.25)
+
+        acceleration = 3 * \
+            int(str(bin(self.isKeyDown(pygame.constants.K_w))), 2)
+        acceleration -= int(str(bin(self.isKeyDown(pygame.constants.K_s))), 2)
+        truck.accelerate(acceleration*0.1)
+
+        truck.move()
 
     def quit(self, event):
         """Zakończenie działania programu."""
