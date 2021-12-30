@@ -17,7 +17,6 @@ class Rect(Component):
         return self.__size
 
     def render(self):
-        self.__color.a = self.getParent().getVisibility()
         self.__surface.fill(self.__color)
         return self.__surface, self.__origin
 
