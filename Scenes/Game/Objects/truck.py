@@ -8,7 +8,7 @@ class Truck(Object):
     def __init__(self, camera, screenSize):
         super().__init__(
             "Truck", (screenSize[0]/2, screenSize[1]/2), parent=camera)
-        self.addComponent(Image("Truck", (0, 0)))
+        self.addComponent(Image("Truck", (0.5, 0.5)))
         self.__rotation = 0
         self.__rotationSpeed = 0
         self.__acceleration = 0
