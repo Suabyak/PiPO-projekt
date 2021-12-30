@@ -7,13 +7,17 @@ class Animation(Component, ABC):
     def __init__(self, time, active=False):
         self.__time = time
         self.__clock = 0
+        if not isinstance(active, bool):
+            raise Exception(
+                "Value of action has to be of "
+                f"boolean type not {active.__class__.__name__}.")
         self.__active = active
 
     def tick(self):
         self.__clock += 1
         self.takeEffect()
         if self.__clock >= self.__time:
-            self.reset()
+            self.finish()
 
     def getClock(self):
         return float(self.__clock)
@@ -33,6 +37,9 @@ class Animation(Component, ABC):
     def reset(self):
         self.__clock = 0
         self.__active = False
+
+    def finish(self):
+        self.reset()
 
     @abstractmethod
     def takeEffect(self):

@@ -35,5 +35,7 @@ class EventOperator:
         w tym momencie obsługiwany."""
         self.__operatableEvents = {
             constants.QUIT: self.__main.quit,
-            constants.MOUSEBUTTONDOWN: self.__main.mouseClick
+            constants.MOUSEBUTTONDOWN: self.__main.mouseClick,
+            constants.KEYDOWN: self.__main.keyDown,
+            constants.KEYUP: self.__main.keyUp
             }

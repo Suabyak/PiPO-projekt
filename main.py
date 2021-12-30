@@ -22,6 +22,7 @@ class Main:
         self.__scenes = self.loadScenes()
         self.__activeScene = None
         self.__running = True
+        self.__keysDown = dict()
 
         self.setActiveScene("MainMenu")
         self.__gameLoop()
@@ -58,15 +59,26 @@ class Main:
     def getScreenSize(self):
         return self.__SCREEN_SIZE
 
+    def isKeyDown(self, key):
+        if key not in self.__keysDown.keys():
+            return False
+        return self.__keysDown[key]
+
     def mouseClick(self, event):
         # pętla od tyłu (jak michael jackson i jego moonwalk)
         for obj in reversed(self.getActiveScene().getObjects()):
-            if not obj.hasComponent("Collider"):
+            if not obj.hasComponent("Collider") or not obj.isActive():
                 continue
             collider = obj.getComponent("Collider")
             if collider.isOver(obj.getComponent(
                     "Transform").getPosition(), event.dict["pos"]):
                 obj.getComponent("Event").run("Click", event)
+
+    def keyDown(self, event):
+        self.__keysDown[event.dict["key"]] = 1
+
+    def keyUp(self, event):
+        self.__keysDown.pop(event.dict["key"])
 
     def tickAnimations(self, scene):
         for obj in scene.getObjects():
@@ -79,6 +91,11 @@ class Main:
         """Zakończenie działania programu."""
         self.__running = False
         Log.executionLog(f"{self.__TITLE} shat down.")
+
+    def startGame(self):
+        Log.executionLog("Game started.")
+        self.setActiveScene("Game")
+        self.getActiveScene().start()
 
 
 if __name__ == "__main__":
