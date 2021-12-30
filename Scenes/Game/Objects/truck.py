@@ -1,5 +1,6 @@
 from Renderer.Objects.object import Object
 from Renderer.Objects.Components.image import Image
+from Renderer.renderer import Renderer
 from pygame import transform
 from Utils.maths import sin, isBetween, cos
 
@@ -32,31 +33,21 @@ class Truck(Object):
         self.__rotation += self.__rotationSpeed * (self.__velocity * 0.1)
         self.__rotation %= 360
 
-        vertMultiplier = int(isBetween(90, 270, self.__rotation))
-        vertMultiplier *= 2
-        vertMultiplier -= 1
-        sinRotation = sin(self.__rotation)
-        cosRotation = cos(self.__rotation)
-        verticalOffset = self.__velocity * cosRotation
-        horizontalOffset = self.__velocity * sinRotation
-        horMultiplier = int(horizontalOffset >= 0)
-        horMultiplier *= 2
-        horMultiplier -= 1
-        verticalOffset = abs(verticalOffset) * vertMultiplier
-        horizontalOffset = abs(horizontalOffset) * horMultiplier
+        verticalOffset = self.__velocity * sin(self.__rotation-90)
+        horizontalOffset = self.__velocity * cos(self.__rotation-90)
         self.getComponent("Transform").move(
             (horizontalOffset, verticalOffset))
-        self.getParent().move((-horizontalOffset, -verticalOffset))
+        self.getParent().move((-horizontalOffset, - verticalOffset))
 
         self.applyFriction()
 
     def rotate(self, angle):
-        self.__rotationSpeed += angle
+        self.__rotationSpeed += angle * Renderer.getDeltaTime()
 
     def accelerate(self, acceleration):
         self.__acceleration = acceleration
-        self.__velocity += self.__acceleration
+        self.__velocity += self.__acceleration * Renderer.getDeltaTime()
 
     def applyFriction(self):
         self.__rotationSpeed *= 0.95
-        self.__velocity *= 0.99
+        self.__velocity *= 0.98

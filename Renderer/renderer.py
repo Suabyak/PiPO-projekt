@@ -3,15 +3,17 @@ from log import Log
 
 
 class Renderer:
+    __deltaTime = 0
+
     def __init__(self, resolution):
         self.__display = Display.set_mode(resolution)
-        self.__clock = Time.Clock()
         self.__FPSLimit = 144
+        self.__clock = Time.Clock()
         Log.executionLog("Renderer created.")
 
     def render(self, scene):
         """Wyświetlanie wszystkich elementów na ekranie."""
-        self.__clock.tick(self.__FPSLimit)
+        Renderer.__deltaTime = self.__clock.tick(self.__FPSLimit) / 1000.0
         self.__display.fill((0, 0, 0))
         for obj in scene.getObjects():
             if (obj.isActive() and obj.isRenderable()):
@@ -36,3 +38,6 @@ class Renderer:
                                           position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
                         self.__display.blit(surface, renderPosition)
         Display.flip()
+
+    def getDeltaTime():
+        return Renderer.__deltaTime

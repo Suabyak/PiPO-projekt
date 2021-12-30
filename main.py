@@ -13,7 +13,7 @@ class Main:
     def __init__(self):
         pygame.init()  # Inicjalizacja pygame
         self.__TITLE = "Strażak Bam-Bam"
-        self.__SCREEN_SIZE = (800, 640)
+        self.__SCREEN_SIZE = (1200, 675)
         Log.executionLog(f"\n{'-'*50}")
         Log.executionLog(f"{self.__TITLE} started.")
 
@@ -94,12 +94,12 @@ class Main:
         truck = Object.get("Truck")
         rotSpeed = -int(self.isKeyDown(pygame.constants.K_a))
         rotSpeed += int(self.isKeyDown(pygame.constants.K_d))
-        truck.rotate(rotSpeed*0.11)
+        truck.rotate(rotSpeed*8.5)
 
         acceleration = 3 * \
             int(self.isKeyDown(pygame.constants.K_w))
         acceleration -= int(self.isKeyDown(pygame.constants.K_s))
-        truck.accelerate(acceleration*0.03)
+        truck.accelerate(acceleration*4.5)
 
         truck.move()
 
