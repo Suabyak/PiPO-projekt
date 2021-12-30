@@ -1,7 +1,7 @@
 from Renderer.Objects.object import Object
 from Renderer.Objects.Components.image import Image
 from pygame import transform
-from Utils.maths import sin, isBetween
+from Utils.maths import sin, isBetween, cos
 
 
 class Truck(Object):
@@ -20,24 +20,32 @@ class Truck(Object):
         surface.set_alpha(self.getVisibility())
         surfaceSize = surface.get_size()
         surface = transform.rotate(surface, -self.__rotation)
+        sizeDifference = (0.5 * (surfaceSize[0]-surface.get_size()[0]),
+                          0.5 * (surfaceSize[1]-surface.get_size()[1]))
         parent = self.getParent()
         parentPos = parent.getComponent("Transform").getPosition()
-        renderPosition = (position[0]-surfaceSize[0]*(origin.x)+parentPos[0],
-                          position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
+        renderPosition = (sizeDifference[0]+position[0]-surfaceSize[0]*(origin.x)+parentPos[0],
+                          sizeDifference[1]+position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
         return surface, renderPosition
 
     def move(self):
-        self.__rotation += self.__rotationSpeed
+        self.__rotation += self.__rotationSpeed * (self.__velocity * 0.1)
         self.__rotation %= 360
 
-        vertMultiplier = int(str(bin(isBetween(90, 270, self.__rotation))), 2)
+        vertMultiplier = int(isBetween(90, 270, self.__rotation))
         vertMultiplier *= 2
         vertMultiplier -= 1
         sinRotation = sin(self.__rotation)
-        verticalOffset = self.__velocity * \
-            (vertMultiplier * (1 - abs(sinRotation)))
+        cosRotation = cos(self.__rotation)
+        verticalOffset = self.__velocity * cosRotation
         horizontalOffset = self.__velocity * sinRotation
-        self.getComponent("Transform").move((horizontalOffset, verticalOffset))
+        horMultiplier = int(horizontalOffset >= 0)
+        horMultiplier *= 2
+        horMultiplier -= 1
+        verticalOffset = abs(verticalOffset) * vertMultiplier
+        horizontalOffset = abs(horizontalOffset) * horMultiplier
+        self.getComponent("Transform").move(
+            (horizontalOffset, verticalOffset))
         self.getParent().move((-horizontalOffset, -verticalOffset))
 
         self.applyFriction()

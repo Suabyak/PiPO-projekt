@@ -1,4 +1,4 @@
-from math import sin as sinus, radians
+from math import sin as sinus, radians, cos as cosinus
 
 
 class Vector2:
@@ -67,3 +67,7 @@ def isBetween(min, max, val):
 
 def sin(x):
     return sinus(radians(x))
+
+
+def cos(x):
+    return cosinus(radians(x))
