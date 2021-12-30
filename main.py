@@ -92,13 +92,13 @@ class Main:
 
     def tickGame(self):
         truck = Object.get("Truck")
-        rotSpeed = -int(str(bin(self.isKeyDown(pygame.constants.K_a))), 2)
-        rotSpeed += int(str(bin(self.isKeyDown(pygame.constants.K_d))), 2)
+        rotSpeed = -int(self.isKeyDown(pygame.constants.K_a))
+        rotSpeed += int(self.isKeyDown(pygame.constants.K_d))
         truck.rotate(rotSpeed*0.15)
 
         acceleration = 3 * \
-            int(str(bin(self.isKeyDown(pygame.constants.K_w))), 2)
-        acceleration -= int(str(bin(self.isKeyDown(pygame.constants.K_s))), 2)
+            int(self.isKeyDown(pygame.constants.K_w))
+        acceleration -= int(self.isKeyDown(pygame.constants.K_s))
         truck.accelerate(acceleration*0.05)
 
         truck.move()
