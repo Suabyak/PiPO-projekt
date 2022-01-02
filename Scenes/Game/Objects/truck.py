@@ -2,7 +2,7 @@ from Renderer.Objects.object import Object
 from Renderer.Objects.Components.image import Image
 from Renderer.renderer import Renderer
 from pygame import transform
-from Utils.maths import sin, isBetween, cos
+from Utils.maths import sin, cos
 
 
 class Truck(Object):

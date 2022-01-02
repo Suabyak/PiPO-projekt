@@ -22,3 +22,6 @@ class Rect(Component):
 
     def isRenderable(self):
         return True
+
+    def setColour(self, colour):
+        self.__color == colour
