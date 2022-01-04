@@ -11,7 +11,7 @@ class Map(Object):
         self.ROAD_COLOUR = (81, 81, 81)
         self.GRASS_COLOUR = (60, 125, 45)
         self.MAP_SIZE = (48, 48)
-        self.ROAD_COUNT = 35
+        self.ROAD_COUNT = 25
         self.MAIN_ROAD_COUNT = 3
         self.ROAD_MIN_LEN = 0.3
         self.ROAD_MAX_LEN = 0.6

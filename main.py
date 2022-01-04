@@ -101,7 +101,7 @@ class Main:
         acceleration = 3 * \
             int(self.isKeyDown(pygame.constants.K_w))
         acceleration -= int(self.isKeyDown(pygame.constants.K_s))
-        truck.accelerate(acceleration*4.5)
+        truck.accelerate(acceleration*4.2)
 
         truck.move()
 

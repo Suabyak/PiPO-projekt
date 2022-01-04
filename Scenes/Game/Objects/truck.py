@@ -32,6 +32,7 @@ class Truck(Object):
     def move(self):
         self.__rotation += self.__rotationSpeed * (self.__velocity * 0.1)
         self.__rotation %= 360
+        print(self.__rotationSpeed, self.__velocity)
 
         verticalOffset = self.__velocity * sin(self.__rotation-90)
         horizontalOffset = self.__velocity * cos(self.__rotation-90)
@@ -49,5 +50,5 @@ class Truck(Object):
         self.__velocity += self.__acceleration * Renderer.getDeltaTime()
 
     def applyFriction(self):
-        self.__rotationSpeed *= 0.95
+        self.__rotationSpeed *= 0.96
         self.__velocity *= 0.98
