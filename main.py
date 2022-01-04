@@ -7,7 +7,7 @@ from Renderer.Objects.Components.animationSequence import AnimationSequence
 from log import Log
 from os import listdir, system
 import traceback
-from pygame import mixer
+from mixer import Mixer
 
 
 class Main:
@@ -20,6 +20,7 @@ class Main:
 
         self.__eventOperator = EventOperator(self)
         self.__renderer = Renderer(self.__SCREEN_SIZE)
+        self.__mixer = Mixer()
         pygame.display.set_caption(self.__TITLE)
         self.__scenes = self.loadScenes()
         self.__activeScene = None
@@ -28,6 +29,7 @@ class Main:
 
         self.setActiveScene("MainMenu")
         self.__gameLoop()
+
 
     def __gameLoop(self):
         """Pętla która będzie się wykonywała cały czas dopóki użytkownik
@@ -38,6 +40,7 @@ class Main:
                 self.tickGame()
             self.__renderer.render(self.getActiveScene())
             self.tickAnimations(self.getActiveScene())
+
 
     def loadScenes(self):
         scenes = dict()
@@ -109,13 +112,14 @@ class Main:
         self.__running = False
         Log.executionLog(f"{self.__TITLE} shat down.")
 
+    def playSound(self, event):
+        self.__mixer.playSound(self, event)
+
     def startGame(self):
         Log.executionLog("Game started.")
         self.setActiveScene("Game")
         self.getActiveScene().start()
-
-        mixer.music.load("peaceful.mp3")
-        mixer.music.play(-1)
+        EventOperator.createEvent(EventOperator.PLAY, {"name": "peaceful"})
 
 
 if __name__ == "__main__":

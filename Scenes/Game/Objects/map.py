@@ -52,6 +52,7 @@ class Map(Object):
         roads = list()
 
         for i in range(self.MAIN_ROAD_COUNT):
+            print(i)
             startToBorderDist = randint(1, 4)
             endToBorderDist = randint(1, 4)
             orientation = choice(["N", "E", "S", "W"])

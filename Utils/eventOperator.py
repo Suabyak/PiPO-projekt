@@ -4,10 +4,12 @@ from pygame import event as Event, constants
 class EventOperator:
     """Klasa do obsługi eventów."""
 
+    PLAY = Event.custom_type()
+
     def createEvent(id, values):
         """Stworzenie eventu i umieszczenie go w kolejce
         do obsłużenia później."""
-        Event.post(Event.Event(id+100000, values))
+        Event.post(Event.Event(id, values))
 
     def __init__(self, main):
         """Przekazanie do obiektu odniesienia do głównej klasy."""
@@ -24,6 +26,7 @@ class EventOperator:
             else:
                 print(event)
 
+
     def __initEventOperators(self):
         """Tutaj dodajemy obsługę wszystkich eventów
         które chcemy obsługiwać.
@@ -37,5 +40,7 @@ class EventOperator:
             constants.QUIT: self.__main.quit,
             constants.MOUSEBUTTONDOWN: self.__main.mouseClick,
             constants.KEYDOWN: self.__main.keyDown,
-            constants.KEYUP: self.__main.keyUp
+            constants.KEYUP: self.__main.keyUp,
+            self.PLAY: self.__main.playSound
             }
+
