@@ -36,8 +36,6 @@ class Map(Object):
                                    self.TILE_SIZE * (abs(road[0][1]-road[1][1])+1)))
             roadSurface.fill(self.ROAD_COLOUR)
             self.surface.blit(roadSurface, pos)
-        self.surface = transform.scale(self.surface, (400, 400))
-        self.surfaceSize = self.surface.get_size()
 
     def render(self):
         parent = self.getParent()
@@ -52,7 +50,6 @@ class Map(Object):
         roads = list()
 
         for i in range(self.MAIN_ROAD_COUNT):
-            print(i)
             startToBorderDist = randint(1, 4)
             endToBorderDist = randint(1, 4)
             orientation = choice(["N", "E", "S", "W"])

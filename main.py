@@ -30,7 +30,6 @@ class Main:
         self.setActiveScene("MainMenu")
         self.__gameLoop()
 
-
     def __gameLoop(self):
         """Pętla która będzie się wykonywała cały czas dopóki użytkownik
         nie zechce wyjść z aplikacji, obsługuje ona renderowanie i eventy."""
@@ -40,7 +39,6 @@ class Main:
                 self.tickGame()
             self.__renderer.render(self.getActiveScene())
             self.tickAnimations(self.getActiveScene())
-
 
     def loadScenes(self):
         scenes = dict()
