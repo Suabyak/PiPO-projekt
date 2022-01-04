@@ -29,7 +29,6 @@ class Main:
         self.setActiveScene("MainMenu")
         self.__gameLoop()
 
-
     def __gameLoop(self):
         """Pętla która będzie się wykonywała cały czas dopóki użytkownik
         nie zechce wyjść z aplikacji, obsługuje ona renderowanie i eventy."""
@@ -39,7 +38,6 @@ class Main:
                 self.tickGame()
             self.__renderer.render(self.getActiveScene())
             self.tickAnimations(self.getActiveScene())
-
 
     def loadScenes(self):
         scenes = dict()
@@ -115,7 +113,6 @@ class Main:
         Log.executionLog("Game started.")
         self.setActiveScene("Game")
         self.getActiveScene().start()
-
 
         mixer.music.load("peaceful.mp3")
         mixer.music.play(-1)
