@@ -116,6 +116,7 @@ class Main:
         self.setActiveScene("Game")
         self.getActiveScene().start()
 
+
         mixer.music.load("peaceful.mp3")
         mixer.music.play(-1)
 
