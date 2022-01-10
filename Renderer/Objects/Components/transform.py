@@ -12,5 +12,8 @@ class Transform(Component):
     def move(self, offset):
         self.__position += offset
 
+    def moveTo(self, position):
+        self.__position = maths.Vector2(position)
+
     def getPosition(self):
         return (self.__position.x, self.__position.y)
