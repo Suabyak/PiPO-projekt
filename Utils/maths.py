@@ -1,4 +1,4 @@
-from math import sin as sinus, radians, cos as cosinus
+from math import sin as sinus, radians, cos as cosinus, asin as aSinus, acos as aCosinus, degrees
 
 
 class Vector2:
@@ -71,3 +71,11 @@ def sin(x):
 
 def cos(x):
     return cosinus(radians(x))
+
+
+def asin(s):
+    return degrees(aSinus(s))
+
+
+def acos(c):
+    return degrees(aCosinus(c))

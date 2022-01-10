@@ -126,6 +126,13 @@ class Main:
         self.setActiveScene("Game")
         EventOperator.createEvent(EventOperator.PLAY, {"name": "peaceful"})
 
+    def mouseMotion(self, event):
+        if self.__activeScene == "Game":
+            mouseX, mouseY = event.dict["pos"]
+            mouseX -= self.__SCREEN_SIZE[0]/2
+            mouseY -= self.__SCREEN_SIZE[1]/2
+            Object.get("WaterCannon").calcRotation(mouseX, mouseY)
+
 
 if __name__ == "__main__":
     try:
