@@ -20,6 +20,10 @@ class Renderer:
                 try:
                     surface, position = obj.render()
                     self.__display.blit(surface, position)
+                    if obj.getId() == "WaterCannon":
+                        for waterBall in obj.getWaterBalls():
+                            surface, position = waterBall.render()
+                            self.__display.blit(surface, position)
                 except Exception:
                     position = obj.getComponent("Transform").getPosition()
                     parent = obj.getParent()

@@ -1,7 +1,8 @@
 from Renderer.Objects.object import Object
 from Renderer.Objects.Components.image import Image
+from Scenes.Game.Objects.waterBall import WaterBall
 from pygame import transform
-from Utils.maths import sin, cos, asin, acos
+from Utils.maths import sin, cos, acos
 from math import sqrt
 
 
@@ -12,6 +13,7 @@ class WaterCannon(Object):
         self.__screenSize = screenSize
         self.__pivot = 31
         self.__rotation = 0
+        self.__waterBalls = list()
 
     def isRenderable(self):
         return True
@@ -37,9 +39,9 @@ class WaterCannon(Object):
         truckSizeDifference = (0.5 * (truckSurfaceSize[0]-truckSurface.get_size()[0]),
                                0.5 * (truckSurfaceSize[1]-truckSurface.get_size()[1]))
 
-        renderPosition = (horizontalOffset+sizeDifference[0]+truckPosition[0]-truckSizeDifference[0]+(truckSurfaceSize[0]-surfaceSize[0])/2,
-                          verticalOffset+sizeDifference[1]+truckPosition[1]-truckSizeDifference[1]+(truckSurfaceSize[1]-surfaceSize[1])/2)
-        return (surface, renderPosition)
+        self.__renderPosition = (horizontalOffset+sizeDifference[0]+truckPosition[0]-truckSizeDifference[0]+(truckSurfaceSize[0]-surfaceSize[0])/2,
+                                 verticalOffset+sizeDifference[1]+truckPosition[1]-truckSizeDifference[1]+(truckSurfaceSize[1]-surfaceSize[1])/2)
+        return (surface, self.__renderPosition)
 
     def calcRotation(self, x, y):
         z = sqrt(x**2 + y**2)
@@ -47,3 +49,18 @@ class WaterCannon(Object):
             _cos = x/z
             self.__rotation = (1-2*int(y < 0))*acos(_cos)
             self.__rotation += 90
+
+    def fire(self):
+        x, y = self.getComponent("Transform").getPosition()
+        truckPosition = Object.get("Truck").getComponent(
+            "Transform").getPosition()
+        waterBall = WaterBall(
+            self.__rotation, (x+truckPosition[0], y+truckPosition[1]), self.__pivot)
+        self.__waterBalls.append(waterBall)
+
+    def getWaterBalls(self):
+        return self.__waterBalls
+
+    def tickWaterBalls(self):
+        for waterBall in self.__waterBalls:
+            waterBall.tick()

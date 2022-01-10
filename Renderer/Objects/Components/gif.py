@@ -6,11 +6,12 @@ from log import Log
 
 class Gif(Component):
 
-    def __init__(self, path, timeToChange):
+    def __init__(self, path, timeToChange, action=None):
         self.__activeImage = 0
         self.__timeToChange = timeToChange
         self.__timer = timeToChange
         self.__images = dict()
+        self.__action = action
         i = 0
         while 1:
             try:
@@ -27,6 +28,8 @@ class Gif(Component):
         self.__activeImage += 1
         if self.__activeImage == len(self.__images):
             self.__activeImage = 0
+            if self.__action:
+                self.__action()
 
     def render(self):
         return self.__images[self.__activeImage].render()
@@ -36,3 +39,6 @@ class Gif(Component):
         if self.__timer < 0:
             self.__timer += self.__timeToChange
             self.nextImage()
+
+    def getActiveImage(self):
+        return self.__activeImage

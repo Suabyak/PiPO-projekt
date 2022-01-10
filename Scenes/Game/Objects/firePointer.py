@@ -37,7 +37,6 @@ class FirePointer(Object):
             "Transform").getPosition()
         x = truckPosition[0] - x
         y = truckPosition[1] - y
-        print(x, y)
         if abs(x) < self.screenSize[0]/2 and abs(y) < self.screenSize[1]/2:
             self.setActive(False)
         z = sqrt(x**2 + y**2)

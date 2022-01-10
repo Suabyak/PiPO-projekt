@@ -36,7 +36,6 @@ class Object(ABC):
         if self.hasComponent(componentType):
             return self.__components[componentType]
         else:
-            print(f"Ten obiekt nie ma komponentu typu \'{componentType}\'")
             Log.executionLog(
                 f"\n[!] Object \"{self.getId()}\" has no Component \"{componentType}\"\n")
             exit(1)

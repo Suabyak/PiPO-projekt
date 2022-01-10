@@ -62,7 +62,6 @@ class Truck(Object):
         self.getParent().move((-horizontalOffset, - verticalOffset))
         self.keepOnMap()
         self.applyFriction()
-        print(self.getComponent("Transform").getPosition())
 
     def rotate(self, angle):
         self.__rotationSpeed += angle * Renderer.getDeltaTime() * (1+0.3*self.__onGrass)

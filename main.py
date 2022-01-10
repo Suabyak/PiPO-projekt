@@ -78,6 +78,9 @@ class Main:
             if collider.isOver(obj.getComponent(
                     "Transform").getPosition(), event.dict["pos"]):
                 obj.getComponent("Event").run("Click", event)
+                return
+        if self.__activeScene == "Game":
+            Object.get("WaterCannon").fire()
 
     def keyDown(self, event):
         self.__keysDown[event.dict["key"]] = 1
@@ -120,6 +123,7 @@ class Main:
         if firePointer.isActive():
             firePointer.calcRotation()
         fire.tick()
+        Object.get("WaterCannon").tickWaterBalls()
 
     def quit(self, event):
         """Zakończenie działania programu."""
