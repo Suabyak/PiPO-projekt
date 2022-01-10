@@ -14,7 +14,10 @@ class Renderer:
     def render(self, scene):
         """Wyświetlanie wszystkich elementów na ekranie."""
         Renderer.__deltaTime = self.__clock.tick(self.__FPSLimit) / 1000.0
-        self.__display.fill((0, 0, 0))
+        if scene.getId() == "Game":
+            self.__display.fill((50, 115, 35))
+        else:
+            self.__display.fill((0, 0, 0))
         for obj in scene.getObjects():
             if (obj.isActive() and obj.isRenderable()):
                 try:
