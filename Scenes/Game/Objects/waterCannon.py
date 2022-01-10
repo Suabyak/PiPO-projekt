@@ -12,7 +12,6 @@ class WaterCannon(Object):
         self.__screenSize = screenSize
         self.__pivot = 31
         self.__rotation = 0
-        self.calcRotation(0, 1)
 
     def isRenderable(self):
         return True

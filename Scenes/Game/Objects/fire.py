@@ -7,10 +7,11 @@ from Utils.maths import getMinAndMax
 
 
 class Fire(Object):
-    def __init__(self, parent):
+    def __init__(self, parent, screenSize):
         super().__init__("Fire", parent=parent, active=False)
         self.addComponent(Gif("fire", 0.15))
         self.setTimeToFire()
+        self.screenSize = screenSize
 
     def tick(self):
         if self.isActive():
@@ -30,6 +31,22 @@ class Fire(Object):
         self.__timeToFire = randint(3, 7)
 
     def startFire(self):
+        truckPosition = Object.get("Truck").getRenderPosition()
+        x, y = truckPosition
+        while (abs(x - truckPosition[0]) < self.screenSize[0]
+               and abs(y - truckPosition[1]) < self.screenSize[1]):
+            x, y = self.__getRandomPosition()
+        self.getComponent("Transform").moveTo((x, y))
+        self.setActive(True)
+        self.__hp = 100
+        EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
+        Object.get("FirePointer").setActive(True)
+        Object.get("FirePointer").calcRotation(x, y)
+        Object.get("FireAppearedLabel").setActive(True)
+        Object.get("FireAppearedLabel").getComponent("Fade").activate()
+        #play evil sound
+
+    def __getRandomPosition(self):
         map = Object.get("Map")
         road = choice(map.getRoads())
         xMin, xMax = getMinAndMax(road[0][0], road[1][0])
@@ -40,13 +57,7 @@ class Fire(Object):
         y *= map.TILE_SIZE
         x += randint(0, map.TILE_SIZE) - map.TILE_SIZE*map.MAP_SIZE[0]/2
         y += randint(0, map.TILE_SIZE) - map.TILE_SIZE*map.MAP_SIZE[1]/2
-        self.getComponent("Transform").moveTo((x, y))
-        self.setActive(True)
-        self.__hp = 100
-        EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
-        Object.get("FireAppearedLabel").setActive(True)
-        Object.get("FireAppearedLabel").getComponent("Fade").activate()
-        #play evil sound
+        return x, y
 
     def getHit(self, waterDamage):
         self.__hp -= waterDamage

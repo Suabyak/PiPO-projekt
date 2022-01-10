@@ -5,6 +5,7 @@ from Scenes.Game.Objects.truck import Truck
 from Scenes.Game.Objects.fire import Fire
 from Scenes.Game.Objects.waterCannon import WaterCannon
 from Scenes.Game.Objects.fireAppearedLabel import FireAppearedLabel
+from Scenes.Game.Objects.firePointer import FirePointer
 
 
 class Game(Scene):
@@ -14,7 +15,8 @@ class Game(Scene):
         camera = Camera()
         self.addObject(camera)
         self.addObject(Map(camera))
-        self.addObject(Fire(camera))
+        self.addObject(Fire(camera, screenSize))
+        self.addObject(FirePointer(screenSize))
         self.addObject(Truck(camera, screenSize))
         self.addObject(WaterCannon(screenSize))
         self.addObject(FireAppearedLabel(screenSize))

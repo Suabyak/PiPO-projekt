@@ -108,7 +108,18 @@ class Main:
         truck.accelerate(acceleration*4.2)
 
         truck.move()
-        Object.get("Fire").tick()
+        firePointer = Object.get("FirePointer")
+        fire = Object.get("Fire")
+        if fire.isActive() and not firePointer.isActive():
+            truckPosition = truck.getComponent("Transform").getPosition()
+            x, y = fire.getComponent("Transform").getPosition()
+            x = truckPosition[0] - x
+            y = truckPosition[1] - y
+            if abs(x) > self.__SCREEN_SIZE[0]/2 or abs(y) > self.__SCREEN_SIZE[1]/2:
+                firePointer.setActive(True)
+        if firePointer.isActive():
+            firePointer.calcRotation()
+        fire.tick()
 
     def quit(self, event):
         """Zakończenie działania programu."""
