@@ -16,7 +16,7 @@ class Fire(Object):
         super().__init__("Fire", parent=parent, active=False)
         self.addComponent(Gif("fire", 0.15))
         surface, _ = self.getComponent("Gif").render()
-        self.addComponent(Collider(surface.get_size(), (0, 0)))
+        self.addComponent(Collider(surface.get_size(), (0.5, 0.5)))
         self.setTimeToFire()
         self.screenSize = screenSize
 
@@ -69,6 +69,11 @@ class Fire(Object):
 
     def getHit(self, waterDamage):
         self.__hp -= waterDamage
+        self.scale = self.__hp / self.__maxHP
+        surface, _ = self.getComponent("Gif").render()
+        surfaceSize = surface.get_size()
+        self.getComponent("Collider").setSize((surfaceSize[0]*self.scale,
+                                               surfaceSize[1]*self.scale))
         Log.executionLog(f"Fire hit for {waterDamage} damage.")
         if self.__hp <= 0:
             self.stopFire()
@@ -83,9 +88,8 @@ class Fire(Object):
         position = self.getComponent("Transform").getPosition()
         surface, origin = self.getComponent("Gif").render()
         surfaceSize = surface.get_size()
-        scale = self.__hp / self.__maxHP
         surface = transform.scale(
-            surface, (int(surfaceSize[0]*scale), int(surfaceSize[1]*scale)))
+            surface, (int(surfaceSize[0]*self.scale), int(surfaceSize[1]*self.scale)))
         sizeDifference = (0.5 * (surfaceSize[0]-surface.get_size()[0]),
                           0.5 * (surfaceSize[1]-surface.get_size()[1]))
         parentPos = self.getParent().getComponent("Transform").getPosition()

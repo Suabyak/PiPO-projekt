@@ -18,3 +18,6 @@ class Collider(Component):
         yMin, yMax = maths.getMinAndMax(boundaries[0][1], boundaries[1][1])
         return (maths.isBetween(xMin, xMax, pos[0])
                 and maths.isBetween(yMin, yMax, pos[1]))
+
+    def setSize(self, size):
+        self.__size = maths.Vector2(size)
