@@ -1,8 +1,9 @@
 from Renderer.Objects.object import Object
 from Renderer.Objects.Components.gif import Gif
 from Renderer.renderer import Renderer
-from random import randint
+from random import randint, choice
 from Utils.eventOperator import EventOperator
+from Utils.maths import getMinAndMax
 
 
 class Fire(Object):
@@ -29,9 +30,24 @@ class Fire(Object):
         self.__timeToFire = randint(3, 7)
 
     def startFire(self):
+        map = Object.get("Map")
+        road = choice(map.getRoads())
+        print(randint(0, 0))
+        xMin, xMax = getMinAndMax(road[0][0], road[1][0])
+        yMin, yMax = getMinAndMax(road[0][1], road[1][1])
+        x, y = (randint(xMin, xMax),
+                randint(yMin, yMax))
+        print(road, x, y)
+        x *= map.TILE_SIZE
+        y *= map.TILE_SIZE
+        x += randint(0, map.TILE_SIZE) - map.TILE_SIZE*map.MAP_SIZE[0]/2
+        y += randint(0, map.TILE_SIZE) - map.TILE_SIZE*map.MAP_SIZE[1]/2
+        self.getComponent("Transform").moveTo((x, y))
+        print(f"{x}, {y}!!!!!!!!!!!!!!!!!!!!!\n"*500)
         self.setActive(True)
         self.__hp = 100
         EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
+        Object.get("FireAppearedLabel").setActive(True)
         Object.get("FireAppearedLabel").getComponent("Fade").activate()
         #play evil sound
 
