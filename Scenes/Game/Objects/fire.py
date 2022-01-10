@@ -32,6 +32,7 @@ class Fire(Object):
         self.setActive(True)
         self.__hp = 100
         EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
+        Object.get("FireAppearedLabel").getComponent("Fade").activate()
         #play evil sound
 
     def getHit(self, waterDamage):
