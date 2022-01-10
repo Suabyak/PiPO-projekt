@@ -59,7 +59,7 @@ class Truck(Object):
                        self.__tile[1]//map.TILE_SIZE+map.MAP_SIZE[1]/2)
         self.isOnGrass()
         self.getParent().move((-horizontalOffset, - verticalOffset))
-
+        self.keepOnMap()
         self.applyFriction()
 
     def rotate(self, angle):
@@ -85,3 +85,21 @@ class Truck(Object):
                 self.__onGrass = 0
                 return
         self.__onGrass = 1
+
+    def keepOnMap(self):
+        map = Object.get("Map")
+        xSize, ySize = (map.TILE_SIZE*map.MAP_SIZE[0]/2,
+                        map.TILE_SIZE*map.MAP_SIZE[1]/2)
+        xPos, yPos = self.getComponent("Transform").getPosition()
+        if abs(xPos) > abs(xSize):
+            xOffset = (abs(xPos) - abs(xSize)) * -(abs(xPos) / xPos)
+        else:
+            xOffset = 0
+        if abs(yPos) > abs(ySize):
+            yOffset = (abs(yPos) - abs(ySize)) * -(abs(yPos) / yPos)
+        else:
+            yOffset = 0
+        self.getComponent("Transform").move(
+            (xOffset, yOffset))
+        self.getParent().move((-xOffset, -yOffset))
+        print(xOffset, yOffset)
