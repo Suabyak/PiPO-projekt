@@ -2,7 +2,7 @@ from Renderer.Objects.object import Object
 from Renderer.Objects.Components.image import Image
 from Renderer.renderer import Renderer
 from pygame import transform
-from Utils.maths import sin, cos
+from Utils.maths import sin, cos, isBetween
 
 
 class Truck(Object):
@@ -16,6 +16,7 @@ class Truck(Object):
         self.__velocity = 0
         self.__handleBrake = 0
         self.__onGrass = 0
+        self.__tile = 0
 
         map = Object.get("Map")
         mainRoad = map.getRoads()[0]
@@ -52,18 +53,22 @@ class Truck(Object):
         horizontalOffset = self.__velocity * cos(self.__rotation-90)
         self.getComponent("Transform").move(
             (horizontalOffset, verticalOffset))
+        map = Object.get("Map")
+        self.__tile = self.getComponent("Transform").getPosition()
+        self.__tile = (self.__tile[0]//map.TILE_SIZE+map.MAP_SIZE[0]/2,
+                       self.__tile[1]//map.TILE_SIZE+map.MAP_SIZE[1]/2)
         self.isOnGrass()
         self.getParent().move((-horizontalOffset, - verticalOffset))
 
         self.applyFriction()
 
     def rotate(self, angle):
-        self.__rotationSpeed += angle * Renderer.getDeltaTime()
+        self.__rotationSpeed += angle * Renderer.getDeltaTime() * (1+0.3*self.__onGrass)
 
     def accelerate(self, acceleration):
         self.__acceleration = acceleration
         self.__velocity += self.__acceleration * \
-            Renderer.getDeltaTime()
+            Renderer.getDeltaTime() * (1-self.__onGrass*0.5)
 
     def applyFriction(self):
         self.__rotationSpeed *= (0.96 + self.__handleBrake * 0.025)
@@ -74,3 +79,9 @@ class Truck(Object):
 
     def isOnGrass(self):
         map = Object.get("Map")
+        for road in map.getRoads():
+            if (isBetween(road[0][0], road[1][0], self.__tile[0])
+                    and isBetween(road[0][1], road[1][1], self.__tile[1])):
+                self.__onGrass = 0
+                return
+        self.__onGrass = 1

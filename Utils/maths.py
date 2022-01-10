@@ -62,7 +62,7 @@ def getMinAndMax(val1, val2):
 
 
 def isBetween(min, max, val):
-    return min <= val and val < max
+    return min <= val and val <= max
 
 
 def sin(x):
