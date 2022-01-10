@@ -15,6 +15,20 @@ class Truck(Object):
         self.__acceleration = 0
         self.__velocity = 0
         self.__handleBrake = 0
+        self.__onGrass = 0
+
+        map = Object.get("Map")
+        mainRoad = map.getRoads()[0]
+        tile = ((1+mainRoad[0][0]+mainRoad[1][0]-map.MAP_SIZE[0])/2.0,
+                (1+mainRoad[0][1]+mainRoad[1][1]-map.MAP_SIZE[1])/2.0)
+        horizontalOffset = tile[0]*map.TILE_SIZE-screenSize[0]/2
+        verticalOffset = tile[1]*map.TILE_SIZE-screenSize[1]/2
+        self.getComponent("Transform").move(
+            (horizontalOffset, verticalOffset))
+        self.getParent().move((-horizontalOffset, - verticalOffset))
+
+        if map.determineRoadOrientation(mainRoad) == "X":
+            self.__rotation = 90
 
     def render(self):
         position = self.getComponent("Transform").getPosition()
@@ -38,6 +52,7 @@ class Truck(Object):
         horizontalOffset = self.__velocity * cos(self.__rotation-90)
         self.getComponent("Transform").move(
             (horizontalOffset, verticalOffset))
+        self.isOnGrass()
         self.getParent().move((-horizontalOffset, - verticalOffset))
 
         self.applyFriction()
@@ -56,3 +71,6 @@ class Truck(Object):
 
     def setHandleBrake(self, value):
         self.__handleBrake = value
+
+    def isOnGrass(self):
+        map = Object.get("Map")
