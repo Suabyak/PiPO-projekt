@@ -5,6 +5,7 @@ class EventOperator:
     """Klasa do obsługi eventów."""
 
     PLAY = Event.custom_type()
+    STOP = Event.custom_type()
 
     def createEvent(id, values):
         """Stworzenie eventu i umieszczenie go w kolejce
@@ -26,7 +27,6 @@ class EventOperator:
             else:
                 print(event)
 
-
     def __initEventOperators(self):
         """Tutaj dodajemy obsługę wszystkich eventów
         które chcemy obsługiwać.
@@ -41,6 +41,6 @@ class EventOperator:
             constants.MOUSEBUTTONDOWN: self.__main.mouseClick,
             constants.KEYDOWN: self.__main.keyDown,
             constants.KEYUP: self.__main.keyUp,
-            self.PLAY: self.__main.playSound
+            self.PLAY: self.__main.playSound,
+            self.STOP: self.__main.stopSound
             }
-

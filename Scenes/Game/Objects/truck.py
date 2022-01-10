@@ -102,4 +102,3 @@ class Truck(Object):
         self.getComponent("Transform").move(
             (xOffset, yOffset))
         self.getParent().move((-xOffset, -yOffset))
-        print(xOffset, yOffset)

@@ -7,7 +7,7 @@ from Renderer.Objects.Components.animationSequence import AnimationSequence
 from log import Log
 from os import listdir, system
 import traceback
-from mixer import Mixer
+from Utils.mixer import Mixer
 
 
 class Main:
@@ -108,6 +108,7 @@ class Main:
         truck.accelerate(acceleration*4.2)
 
         truck.move()
+        Object.get("Fire").tick()
 
     def quit(self, event):
         """Zakończenie działania programu."""
@@ -117,10 +118,12 @@ class Main:
     def playSound(self, event):
         self.__mixer.playSound(self, event)
 
+    def stopSound(self, event):
+        self.__mixer.stopSound(self, event)
+
     def startGame(self):
         Log.executionLog("Game started.")
         self.setActiveScene("Game")
-        self.getActiveScene().start()
         EventOperator.createEvent(EventOperator.PLAY, {"name": "peaceful"})
 
 
