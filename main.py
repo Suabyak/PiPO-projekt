@@ -81,9 +81,13 @@ class Main:
 
     def keyDown(self, event):
         self.__keysDown[event.dict["key"]] = 1
+        if event.dict["key"] == pygame.constants.K_SPACE:
+            Object.get("Truck").setHandleBrake(1)
 
     def keyUp(self, event):
         self.__keysDown.pop(event.dict["key"])
+        if event.dict["key"] == pygame.constants.K_SPACE:
+            Object.get("Truck").setHandleBrake(0)
 
     def tickAnimations(self, scene):
         for obj in scene.getObjects():
