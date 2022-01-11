@@ -123,7 +123,9 @@ class Main:
         if firePointer.isActive():
             firePointer.calcRotation()
         fire.tick()
-        Object.get("WaterCannon").tickWaterBalls()
+        waterCannon = Object.get("WaterCannon")
+        waterCannon.tick(Renderer.getDeltaTime())
+        waterCannon.tickWaterBalls()
 
     def quit(self, event):
         """Zakończenie działania programu."""

@@ -14,9 +14,14 @@ class WaterCannon(Object):
         self.__pivot = 31
         self.__rotation = 0
         self.__waterBalls = list()
+        self.__reloadTime = 0.3
+        self.__timer = 0
 
     def isRenderable(self):
         return True
+
+    def tick(self, dTime):
+        self.__timer -= dTime
 
     def render(self):
         surface, _ = self.getComponent("Image").render()
@@ -51,6 +56,9 @@ class WaterCannon(Object):
             self.__rotation += 90
 
     def fire(self):
+        if self.__timer > 0:
+            return
+        self.__timer = self.__reloadTime
         x, y = self.getComponent("Transform").getPosition()
         truckPosition = Object.get("Truck").getComponent(
             "Transform").getPosition()
