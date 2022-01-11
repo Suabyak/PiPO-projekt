@@ -104,3 +104,6 @@ class Fire(Object):
         renderPosition = (sizeDifference[0]+position[0]-surfaceSize[0]*(origin.x)+parentPos[0],
                           sizeDifference[1]+position[1]-surfaceSize[1]*(origin.y)+parentPos[1])
         return surface, renderPosition
+
+    def getPosition(self):
+        return self.getComponent("Transform").getPosition()

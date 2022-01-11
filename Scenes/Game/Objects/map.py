@@ -19,15 +19,15 @@ class Map(Object):
         self.createSurface()
 
     def createSurface(self):
-        self.surface = Surface((self.MAP_SIZE[0] * self.TILE_SIZE,
-                                self.MAP_SIZE[1] * self.TILE_SIZE))
-        self.surfaceSize = self.surface.get_size()
+        self.__surface = Surface((self.MAP_SIZE[0] * self.TILE_SIZE,
+                                  self.MAP_SIZE[1] * self.TILE_SIZE))
+        self.surfaceSize = self.__surface.get_size()
         for i in range(self.MAP_SIZE[0] * self.MAP_SIZE[1]):
             tile = Surface(self.TILE_DIMENSIONS)
             tile.fill(self.GRASS_COLOUR)
             destination = (self.TILE_SIZE * (i % self.MAP_SIZE[0]),
                            self.TILE_SIZE * int(i / self.MAP_SIZE[0]))
-            self.surface.blit(tile, destination)
+            self.__surface.blit(tile, destination)
         self.__createRoads()
         for road in self.__roads:
             pos = (getLesser(road[0][0], road[1][0])*self.TILE_SIZE,
@@ -35,13 +35,13 @@ class Map(Object):
             roadSurface = Surface((self.TILE_SIZE * (abs(road[0][0]-road[1][0])+1),
                                    self.TILE_SIZE * (abs(road[0][1]-road[1][1])+1)))
             roadSurface.fill(self.ROAD_COLOUR)
-            self.surface.blit(roadSurface, pos)
+            self.__surface.blit(roadSurface, pos)
 
     def render(self):
         parent = self.getParent()
         parentPos = parent.getComponent("Transform").getPosition()
-        return self.surface, (-self.surfaceSize[0]/2+parentPos[0],
-                              -self.surfaceSize[1]/2+parentPos[1])
+        return self.__surface, (-self.surfaceSize[0]/2+parentPos[0],
+                                -self.surfaceSize[1]/2+parentPos[1])
 
     def isRenderable(self):
         return True
@@ -116,3 +116,6 @@ class Map(Object):
 
     def getRoads(self):
         return self.__roads
+
+    def getSurface(self):
+        return self.__surface
