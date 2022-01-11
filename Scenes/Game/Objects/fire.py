@@ -51,7 +51,8 @@ class Fire(Object):
         self.scale = 1
         EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
         EventOperator.createEvent(EventOperator.PLAY, {"name": "evil"})
-        EventOperator.createEvent(EventOperator.PLAY, {"name": "sygnal"})
+        EventOperator.createEvent(EventOperator.PLAY,
+                                  {"name": "sygnal", "loops": 0})
 
         Object.get("FirePointer").setActive(True)
         Object.get("FirePointer").calcRotation(x, y)

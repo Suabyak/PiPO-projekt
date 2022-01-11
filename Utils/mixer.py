@@ -12,7 +12,10 @@ class Mixer:
                 Mixer.__tracks[path] = mixer.Sound(f"data\\{path}.mp3")
 
     def playSound(self, game, event):
-        Mixer.getTrack(event.dict["name"]).play(-1)
+        loops = -1
+        if "loops" in event.dict.keys():
+            loops = event.dict["loops"]
+        Mixer.getTrack(event.dict["name"]).play(loops)
 
     def stopSound(self, game, event):
         Mixer.getTrack(event.dict["name"]).stop()
