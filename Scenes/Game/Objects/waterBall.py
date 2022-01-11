@@ -31,6 +31,7 @@ class WaterBall(Object):
 
     def render(self):
         surface, _ = self.getComponent("Gif").render()
+        self.surfaceSize = surface.get_size()
         position = self.getComponent("Transform").getPosition()
         cameraPosition = Object.get("Camera").getComponent(
             "Transform").getPosition()
