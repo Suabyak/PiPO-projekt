@@ -72,3 +72,6 @@ class WaterCannon(Object):
     def tickWaterBalls(self):
         for waterBall in self.__waterBalls:
             waterBall.tick()
+
+    def getWaterLevel(self):
+        return self.__timer/self.__reloadTime
