@@ -49,7 +49,9 @@ class Fire(Object):
         self.setActive(True)
         self.__hp = self.__maxHP
         EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
-        #play evil sound
+        EventOperator.createEvent(EventOperator.PLAY, {"name": "evil"})
+        EventOperator.createEvent(EventOperator.PLAY, {"name": "sygnal"})
+
         Object.get("FirePointer").setActive(True)
         Object.get("FirePointer").calcRotation(x, y)
         Object.get("FireAppearedLabel").setActive(True)
@@ -80,7 +82,8 @@ class Fire(Object):
             self.stopFire()
 
     def stopFire(self):
-        #stop evil sound
+        EventOperator.createEvent(EventOperator.STOP, {"name": "evil"})
+        EventOperator.createEvent(EventOperator.STOP, {"name": "sygnal"})
         EventOperator.createEvent(EventOperator.PLAY, {"name": "peaceful"})
         self.setTimeToFire()
         self.setActive(False)
