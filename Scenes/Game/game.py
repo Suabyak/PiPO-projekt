@@ -6,6 +6,7 @@ from Scenes.Game.Objects.fire import Fire
 from Scenes.Game.Objects.waterCannon import WaterCannon
 from Scenes.Game.Objects.fireAppearedLabel import FireAppearedLabel
 from Scenes.Game.Objects.firePointer import FirePointer
+from Scenes.Game.Objects.scoreLabel import ScoreLabel
 
 
 class Game(Scene):
@@ -20,3 +21,4 @@ class Game(Scene):
         self.addObject(Truck(camera, screenSize))
         self.addObject(WaterCannon(screenSize))
         self.addObject(FireAppearedLabel(screenSize))
+        self.addObject(ScoreLabel())

@@ -19,6 +19,7 @@ class Fire(Object):
         self.addComponent(Collider(surface.get_size(), (0.5, 0.5)))
         self.setTimeToFire()
         self.screenSize = screenSize
+        self.__timesExtinguished = 0
 
     def tick(self):
         if self.isActive():
@@ -69,7 +70,7 @@ class Fire(Object):
 
     def getHit(self, waterDamage):
         self.__hp -= waterDamage
-        self.scale = self.__hp / self.__maxHP
+        self.scale = 0.3 + 0.7 * (self.__hp / self.__maxHP)
         surface, _ = self.getComponent("Gif").render()
         surfaceSize = surface.get_size()
         self.getComponent("Collider").setSize((surfaceSize[0]*self.scale,
@@ -83,6 +84,8 @@ class Fire(Object):
         EventOperator.createEvent(EventOperator.PLAY, {"name": "peaceful"})
         self.setTimeToFire()
         self.setActive(False)
+        self.__timesExtinguished += 1
+        Object.get("ScoreLabel").setScore(self.__timesExtinguished)
 
     def render(self):
         position = self.getComponent("Transform").getPosition()

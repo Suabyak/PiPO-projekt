@@ -55,3 +55,6 @@ class Text(Component):
             return Text.__font[size]
         print(f"Nie ma czcionki o wielkości {size}")
         exit(1)
+
+    def setText(self, text):
+        self.__text = text
