@@ -48,6 +48,7 @@ class Fire(Object):
         Log.executionLog(f"Fire started at ({x}, {y})")
         self.setActive(True)
         self.__hp = self.__maxHP
+        self.scale = 1
         EventOperator.createEvent(EventOperator.STOP, {"name": "peaceful"})
         EventOperator.createEvent(EventOperator.PLAY, {"name": "evil"})
         EventOperator.createEvent(EventOperator.PLAY, {"name": "sygnal"})
