@@ -24,6 +24,5 @@ class WaterTank(Object):
             waterLevel = self.__size[1]
         waterSurface = Surface((self.__size[0]-10, waterLevel-10))
         waterSurface.fill((5, 160, 250))
-        print(self.__size[1], waterLevel)
         surface.blit(waterSurface, (5, 5+self.__size[1]-waterLevel))
         return surface, renderPosition

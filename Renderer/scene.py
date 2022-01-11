@@ -13,8 +13,8 @@ class Scene(ABC):
 
     def addObject(self, obj):
         if not issubclass(obj.__class__, Object):
-            print("Nie da się dodać do sceny "
-                  "obiektu nie dziedziczącego z Object.")
+            raise Exception("Nie da się dodać do sceny "
+                            "obiektu nie dziedziczącego z Object.")
             Log.executionLog(
                 f"\n[!] {obj.__class__} cannot be added to Scene \"{self.getId()}\".\n")
             exit(1)

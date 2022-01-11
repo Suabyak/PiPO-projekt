@@ -25,7 +25,7 @@ class EventOperator:
             if event.type in self.__operatableEvents.keys():
                 self.__operatableEvents[event.type](event)
             else:
-                print(event)
+                pass  # print(event)
 
     def __initEventOperators(self):
         """Tutaj dodajemy obsługę wszystkich eventów

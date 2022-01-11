@@ -53,8 +53,7 @@ class Text(Component):
     def getFont(size):
         if size in Text.__font.keys():
             return Text.__font[size]
-        print(f"Nie ma czcionki o wielkości {size}")
-        exit(1)
+        raise Exception(f"Nie ma czcionki o wielkości {size}")
 
     def setText(self, text):
         self.__text = text
