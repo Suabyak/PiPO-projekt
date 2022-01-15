@@ -43,14 +43,8 @@ class Main:
     def loadScenes(self):
         scenes = dict()
 
-        for dictionary in listdir("Scenes"):
-            for scene in listdir(f"Scenes\\{dictionary}"):
-                if ".py" in scene:
-                    scene = scene.replace(".py", "")
-                    exec(
-                        f"from Scenes.{dictionary}.{scene} import {dictionary}")
-                    exec(
-                        f"scenes[{dictionary}.__name__] = {dictionary}(self)")
+        scenes["MainMenu"] = MainMenu(self)
+        scenes["Game"] = Game(self)
 
         return scenes
 
